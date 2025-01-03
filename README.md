@@ -5,13 +5,13 @@ Welcome to the Timer App Assignment! This project is designed to evaluate your s
 ---
 
 ## Enhanacement
-1: Make the application responsive and fixing the design
-2: Fixing the timer to run simultaneously
-3: Store the data into localstorage
-4: Make the Edit/Add Modal to reusable component and eliminating duplication
-5: Fix the error of Resolve the console error that occurs when the snack bar's       
+- **1**: Make the application responsive and fixing the design
+- **2**:: Fixing the timer to run simultaneously
+- **3**:: Store the data into localstorage
+- **4**:: Make the Edit/Add Modal to reusable component and eliminating duplication
+- **5**:: Fix the error of Resolve the console error that occurs when the snack bar's       
 dismiss button is clicked.
-6:Show an error snack bar or notification when the form is submitted with invalid data
+- **6**::Show an error snack bar or notification when the form is submitted with invalid data
 
 ## **Objective**
 Your task is to improve and enhance an existing Timer App based on the following requirements. The app currently has a partially implemented timer system, and your goal is to address the listed issues and extend its functionality.
