@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Plus, Clock } from 'lucide-react';
 import { TimerList } from './components/TimerList';
-import { AddTimerModal } from './components/AddTimerModal';
+// import { AddTimerModal } from './components/AddTimerModal';
 import { Toaster } from 'sonner';
 import { AddandEditModal } from './components/AddandEditModal';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-console.log(window.screen);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
