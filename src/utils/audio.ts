@@ -4,7 +4,9 @@ export class TimerAudio {
   private oscillator: OscillatorNode | null = null;
   private gainNode: GainNode | null = null;
 
-  private constructor() {}
+  private constructor() {
+    //this.stop = this.stop.bind(this);
+  }
 
   static getInstance(): TimerAudio {
     if (!TimerAudio.instance) {
@@ -61,9 +63,12 @@ export class TimerAudio {
     }
   }
 
-  stop(): void {
+  stop=(): void =>{
     this.cleanup();
+    
   }
+  
+
 
   private cleanup(): void {
     if (this.oscillator) {

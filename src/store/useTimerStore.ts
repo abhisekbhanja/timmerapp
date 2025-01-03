@@ -2,8 +2,26 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { Timer } from '../types/timer';
 
+const getfromlocalstorage=():Timer[]=>{
+  try {
+    let timers=localStorage.getItem("alltimers")
+    return timers?JSON.parse(timers):[]
+  } catch (error) {
+    console.log("not able to get from lcalstorage ",error); 
+    return []  
+  }
+}
+
+const addtolocalstorage=(timer:Timer[]):void=>{
+  try {
+    localStorage.setItem("alltimers",JSON.stringify(timer))
+  } catch (error) {
+    console.log("not able to add to lcalstorage ",error);   
+  }
+}
+
 const initialState = {
-  timers: [] as Timer[],
+  timers: getfromlocalstorage(),
 };
 
 const timerSlice = createSlice({
@@ -16,6 +34,9 @@ const timerSlice = createSlice({
         id: crypto.randomUUID(),
         createdAt: Date.now(),
       });
+
+      addtolocalstorage(state.timers)
+      
     },
     deleteTimer: (state, action) => {
       state.timers = state.timers.filter(timer => timer.id !== action.payload);

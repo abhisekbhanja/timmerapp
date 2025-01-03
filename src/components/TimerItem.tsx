@@ -8,6 +8,7 @@ import { EditTimerModal } from './EditTimerModal';
 import { TimerAudio } from '../utils/audio';
 import { TimerControls } from './TimerControls';
 import { TimerProgress } from './TimerProgress';
+import { AddandEditModal } from './AddandEditModal';
 
 interface TimerItemProps {
   timer: Timer;
@@ -19,6 +20,9 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const intervalRef = useRef<number | null>(null);
   const timerAudio = TimerAudio.getInstance();
   const hasEndedRef = useRef(false);
+  console.log(timer);
+  //console.log(typeof(window.screen));
+ 
 
   useEffect(() => {
     if (timer.isRunning) {
@@ -29,8 +33,11 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
           hasEndedRef.current = true;
           timerAudio.play().catch(console.error);
           
-          toast.success(`Timer "${timer.title}" has ended!`, {
+          toast.success(`Timer "${timer.title}" has ended!`,
+             {
+            position:window.screen.width<=786?"bottom-center":"top-right",
             duration: 5000,
+            
             action: {
               label: 'Dismiss',
               onClick: timerAudio.stop,
@@ -39,9 +46,10 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
         }
       }, 1000);
     }
+    
 
     return () => clearInterval(intervalRef.current!);
-  }, [timer.isRunning, timer.id, timer.remainingTime, timer.title, timerAudio, updateTimer]);
+  }, [timer.isRunning, timer.id, timer.remainingTime, timer.title, timerAudio]);
 
   const handleRestart = () => {
     hasEndedRef.current = false;
@@ -54,6 +62,8 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   };
 
   const handleToggle = () => {
+    //console.log(timer);
+    
     if (timer.remainingTime <= 0) {
       hasEndedRef.current = false;
     }
@@ -110,7 +120,7 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
               {formatTime(timer.remainingTime)}
             </div>
             
-            <TimerProgress
+            <TimerProgress 
               progress={(timer.remainingTime / timer.duration) * 100}
             />
             
@@ -125,11 +135,11 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
         </div>
       </div>
 
-      <EditTimerModal
+      <AddandEditModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
-        timer={timer}
-      />
+        timer={timer} 
+        componentName="edit"      />
     </>
   );
 };
