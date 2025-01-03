@@ -40,6 +40,7 @@ const timerSlice = createSlice({
     },
     deleteTimer: (state, action) => {
       state.timers = state.timers.filter(timer => timer.id !== action.payload);
+      addtolocalstorage(state.timers)
     },
     toggleTimer: (state, action) => {
       const timer = state.timers.find(timer => timer.id === action.payload);
@@ -63,11 +64,14 @@ const timerSlice = createSlice({
     },
     editTimer: (state, action) => {
       const timer = state.timers.find(timer => timer.id === action.payload.id);
+      console.log(action.payload.updates);
+      
       if (timer) {
         Object.assign(timer, action.payload.updates);
         timer.remainingTime = action.payload.updates.duration || timer.duration;
         timer.isRunning = false;
       }
+      addtolocalstorage(state.timers)
     },
   },
 });

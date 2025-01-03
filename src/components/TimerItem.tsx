@@ -20,7 +20,7 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const intervalRef = useRef<number | null>(null);
   const timerAudio = TimerAudio.getInstance();
   const hasEndedRef = useRef(false);
-  console.log(timer);
+  //console.log(timer);
   //console.log(typeof(window.screen));
  
 
